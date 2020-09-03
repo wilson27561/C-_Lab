@@ -134,25 +134,22 @@ bool greaterEqual(int hugeInt1[], int hugeInt2[], int hugeInt1Size, int hugeInt2
 void addition(int addend[], int adder[], int sum[], int addendSize, int adderSize, int &sumSize)
 {
 
-    sumSize = addendSize > adderSize ? addendSize : adderSize;
-
+   sumSize = addendSize > adderSize ? addendSize : adderSize;
+   int plus = 0;
    for (int i = 0; i < sumSize; i++)
    {
-      int plus = 0;
-      sum[i] = addend[i] + adder[i] + plus;
-       if( sum[i] >= 10){
-           sum[i] = sum[i]%10;
-           plus = 1;
-       }else{
-           plus = 0;
-       }
-   }
-   for (int i = 0; i < 3; i++)
-   {
-     std::cout << " sum[] : " <<  sum[i] << std::endl;
-   }
-   
+      sum[i] = addend[i] + adder[i] + sum[i];
 
+      if (sum[i] >= 10)
+      {
+         sum[i] = sum[i] - 10;
+         sum[i + 1]++;
+      }
+   }
+   if (sum[sumSize] != 0)
+   {
+      sumSize++;
+   }
 };
 
 // difference = minuend - subtrahend
@@ -161,7 +158,30 @@ void subtraction(int minuend[], int subtrahend[], int difference[],
 
 // product = multiplicand * multiplier
 void multiplication(int multiplicand[], int multiplier[], int product[],
-                    int multiplicandSize, int multiplierSize, int &productSize);
+                    int multiplicandSize, int multiplierSize, int &productSize)
+{
+    for (int i = 0; i < multiplicandSize; i++)
+    {
+       std::cout << multiplicand[i] << std::endl;
+    }
+     for (int i = 0; i < multiplierSize; i++)
+    {
+       std::cout << multiplier[i] << std::endl;
+    }
+    
+    for (int i = 0; i < multiplierSize; i++)
+    {
+      for (int j = 0; j < multiplicandSize; j++)
+      {
+        product[j]  = multiplier[i] * multiplicand[j];
+      }
+      
+    }
+    
+
+
+
+}
 
 // cout << hugeInt1 << op << hugeInt2 << " == " << hugeInt3 << endl << endl;
 void printOperation(int hugeInt1[], int hugeInt2[], int hugeInt3[], char op,
@@ -173,7 +193,7 @@ void print(int hugeInt1[], int hugeInt2[], int hugeInt1Size, int hugeInt2Size, c
 // function main begins program execution
 int main()
 {
-     srand( static_cast< int >( time(0) ) );
+   srand(static_cast<int>(time(0)));
    unsigned int seed;
    cout << "Enter seed: ";
    cin >> seed;
@@ -321,18 +341,23 @@ int main()
    int hugeInt3[arraySize] = {0};
    int hugeInt3Size;
 
-   // // hugeInt3 = hugeInt1 * hugeInt2;
-   // multiplication( hugeInt1, hugeInt2, hugeInt3, hugeInt1Size, hugeInt2Size, hugeInt3Size );
+   // hugeInt3 = hugeInt1 * hugeInt2;
+     int  huge1 [3]  = {0,3,2}; 
+     int  huge2 [2]  = {2,1}; 
+     int n = 4;
 
+     multiplication(huge1, huge2, hugeInt3, 3, 2, hugeInt3Size);
+     printOperation(huge1, huge2, hugeInt3, '*', 3, 2, n);
+
+   // multiplication(hugeInt1, hugeInt2, hugeInt3, hugeInt1Size, hugeInt2Size, hugeInt3Size);
    // // cout << hugeInt1 << " * " << hugeInt2 << " == " << hugeInt3 << endl << endl;
-   // printOperation( hugeInt1, hugeInt2, hugeInt3, '*', hugeInt1Size, hugeInt2Size, hugeInt3Size );
+   // printOperation(hugeInt1, hugeInt2, hugeInt3, '*', hugeInt1Size, hugeInt2Size, hugeInt3Size);
 
    // hugeInt3 = hugeInt1 + hugeInt2
-   addition(hugeInt1, hugeInt2, hugeInt3, hugeInt1Size, hugeInt2Size, hugeInt3Size);
-
-   // cout << hugeInt1 << " + " << hugeInt2 << " == " << hugeInt3 << endl
-   //      << endl;
-   printOperation( hugeInt1, hugeInt2, hugeInt3, '+', hugeInt1Size, hugeInt2Size, hugeInt3Size );
+   // addition(hugeInt1, hugeInt2, hugeInt3, hugeInt1Size, hugeInt2Size, hugeInt3Size);
+   // // cout << hugeInt1 << " + " << hugeInt2 << " == " << hugeInt3 << endl
+   // //      << endl;
+   // printOperation( hugeInt1, hugeInt2, hugeInt3, '+', hugeInt1Size, hugeInt2Size, hugeInt3Size );
 
    // int hugeInt4[ arraySize ] = {0};
    // int hugeInt4Size;
