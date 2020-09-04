@@ -154,33 +154,87 @@ void addition(int addend[], int adder[], int sum[], int addendSize, int adderSiz
 
 // difference = minuend - subtrahend
 void subtraction(int minuend[], int subtrahend[], int difference[],
-                 int &minuendSize, int subtrahendSize, int &differenceSize);
+                 int &minuendSize, int subtrahendSize, int &differenceSize)
+{
+   differenceSize = minuendSize > subtrahendSize ? minuendSize : subtrahendSize;
+   int min = 0;
+   for (int i = 0; i < differenceSize; i++)
+   {
+      if (i >= subtrahendSize)
+      {
+         difference[i] = minuend[i] - min;
+         min = 0;
+      }
+      else if (subtrahend[i] > (minuend[i] - min))
+      {
+         difference[i] = minuend[i] + 10 - subtrahend[i] - min;
+         min = 1;
+      }
+      else
+      {
+         difference[i] = minuend[i] - subtrahend[i] - min;
+         min = 0;
+      }
+   }
+   for (int i = 0; i < 60; i++)
+   {
+     std::cout << difference[i];
+   }
+   std::cout << "  " << std::endl;
+   
+  
+
+    int digits = 0;
+   for (int i = (minuendSize + subtrahendSize - 1); i >= 0; i--)
+   {
+      if (difference[i] == 0)
+      {
+         ++digits;
+         continue;
+      }
+      else
+      {
+         break;
+      }
+   }
+   differenceSize = minuendSize + subtrahendSize - digits;
+}
 
 // product = multiplicand * multiplier
 void multiplication(int multiplicand[], int multiplier[], int product[],
                     int multiplicandSize, int multiplierSize, int &productSize)
 {
-    for (int i = 0; i < multiplicandSize; i++)
-    {
-       std::cout << multiplicand[i] << std::endl;
-    }
-     for (int i = 0; i < multiplierSize; i++)
-    {
-       std::cout << multiplier[i] << std::endl;
-    }
-    
-    for (int i = 0; i < multiplierSize; i++)
-    {
+   for (int i = 0; i < multiplierSize; i++)
+   {
       for (int j = 0; j < multiplicandSize; j++)
       {
-        product[j]  = multiplier[i] * multiplicand[j];
+         product[i + j] += multiplier[i] * multiplicand[j];
       }
-      
-    }
-    
+   }
 
+   for (int i = 0; i < (multiplierSize + multiplicandSize); i++)
+   {
+      if (product[i] >= 10)
+      {
+         product[i + 1] += product[i] / 10;
+         product[i] %= 10;
+      }
+   }
 
-
+   int minus = 0;
+   for (int i = (multiplierSize + multiplicandSize - 1); i >= 0; i--)
+   {
+      if (product[i] == 0)
+      {
+         ++minus;
+         continue;
+      }
+      else
+      {
+         break;
+      }
+   }
+   productSize = multiplierSize + multiplicandSize - minus;
 }
 
 // cout << hugeInt1 << op << hugeInt2 << " == " << hugeInt3 << endl << endl;
@@ -342,31 +396,32 @@ int main()
    int hugeInt3Size;
 
    // hugeInt3 = hugeInt1 * hugeInt2;
-     int  huge1 [3]  = {0,3,2}; 
-     int  huge2 [2]  = {2,1}; 
-     int n = 4;
-
-     multiplication(huge1, huge2, hugeInt3, 3, 2, hugeInt3Size);
-     printOperation(huge1, huge2, hugeInt3, '*', 3, 2, n);
-
-   // multiplication(hugeInt1, hugeInt2, hugeInt3, hugeInt1Size, hugeInt2Size, hugeInt3Size);
-   // // cout << hugeInt1 << " * " << hugeInt2 << " == " << hugeInt3 << endl << endl;
+   multiplication(hugeInt1, hugeInt2, hugeInt3, hugeInt1Size, hugeInt2Size, hugeInt3Size);
+   // cout << hugeInt1 << " * " << hugeInt2 << " == " << hugeInt3 << endl << endl;
    // printOperation(hugeInt1, hugeInt2, hugeInt3, '*', hugeInt1Size, hugeInt2Size, hugeInt3Size);
 
    // hugeInt3 = hugeInt1 + hugeInt2
-   // addition(hugeInt1, hugeInt2, hugeInt3, hugeInt1Size, hugeInt2Size, hugeInt3Size);
-   // // cout << hugeInt1 << " + " << hugeInt2 << " == " << hugeInt3 << endl
-   // //      << endl;
+   addition(hugeInt1, hugeInt2, hugeInt3, hugeInt1Size, hugeInt2Size, hugeInt3Size);
+   // cout << hugeInt1 << " + " << hugeInt2 << " == " << hugeInt3 << endl
+   //      << endl;
    // printOperation( hugeInt1, hugeInt2, hugeInt3, '+', hugeInt1Size, hugeInt2Size, hugeInt3Size );
 
-   // int hugeInt4[ arraySize ] = {0};
-   // int hugeInt4Size;
+   int hugeInt4[arraySize] = {0};
+   int hugeInt4Size;
+
+   // int huge1[4] = {5, 3, 5, 1};
+   // int huge2[2] = {6, 3};
+   // int n = 4;
+   // int m = 2;
+   // int k = 4;
+   // subtraction(huge1, huge2, hugeInt4, n, m, k);
+   // printOperation(huge1, huge2, hugeInt4, '-', n, m, k);
 
    // // hugeInt4 = hugeInt3 - hugeInt1
-   // subtraction( hugeInt3, hugeInt1, hugeInt4, hugeInt3Size, hugeInt1Size, hugeInt4Size );
+   subtraction(hugeInt3, hugeInt1, hugeInt4, hugeInt3Size, hugeInt1Size, hugeInt4Size);
 
    // // cout << hugeInt3 << " - " << hugeInt2 << " == " << hugeInt4 << endl << endl;
-   // printOperation( hugeInt3, hugeInt1, hugeInt4, '-', hugeInt3Size, hugeInt1Size, hugeInt4Size );
+   printOperation(hugeInt3, hugeInt1, hugeInt4, '-', hugeInt3Size, hugeInt1Size, hugeInt4Size);
 
    // // if( hugeInt2 == hugeInt4 ) cout << hugeInt2 << " == " << hugeInt4 << endl << endl;
    // if( equal( hugeInt2, hugeInt4, hugeInt2Size, hugeInt4Size ) )
