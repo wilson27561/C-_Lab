@@ -156,35 +156,76 @@ void addition(int addend[], int adder[], int sum[], int addendSize, int adderSiz
 void subtraction(int minuend[], int subtrahend[], int difference[],
                  int &minuendSize, int subtrahendSize, int &differenceSize)
 {
+   // differenceSize = minuendSize > subtrahendSize ? minuendSize : subtrahendSize;
+   // int min = 0;
+   // for (int i = 0; i < differenceSize; i++)
+   // {
+   //    if (i >= subtrahendSize)
+   //    {
+   //       if (minuend[i] - min < 0)
+   //       {
+   //          difference[i] = minuend[i] - min + 10;
+   //          min = 1;
+   //       }
+   //       else
+   //       {
+   //          difference[i] = minuend[i] - min;
+   //          min = 0;
+   //       }
+   //    }
+   //    else if (subtrahend[i] > (minuend[i] - min))
+   //    {
+   //       difference[i] = minuend[i] + 10 - subtrahend[i] - min;
+   //       min = 1;
+   //    }
+   //    else
+   //    {
+   //       difference[i] = minuend[i] - subtrahend[i] - min;
+   //       min = 0;
+   //    }
+   // }
+   // for (int i = 0; i < 60; i++)
+   // {
+   //    std::cout << difference[i];
+   // }
+   // std::cout << "  " << std::endl;
    differenceSize = minuendSize > subtrahendSize ? minuendSize : subtrahendSize;
    int min = 0;
    for (int i = 0; i < differenceSize; i++)
    {
-      if (i >= subtrahendSize)
+      if (i < subtrahendSize)
       {
-         difference[i] = minuend[i] - min;
-         min = 0;
-      }
-      else if (subtrahend[i] > (minuend[i] - min))
-      {
-         difference[i] = minuend[i] + 10 - subtrahend[i] - min;
-         min = 1;
+         if (subtrahend[i] > (minuend[i] - min))
+         {
+            difference[i] = minuend[i] - min + 10 - subtrahend[i];
+            min = 1;
+         }
+         else
+         {
+            difference[i] = minuend[i] - min - subtrahend[i];
+            min = 0;
+         }
       }
       else
       {
-         difference[i] = minuend[i] - subtrahend[i] - min;
-         min = 0;
-      }
+         if (minuend[i] - min < 0)
+         {
+            difference[i] = minuend[i] - min + 10;
+            min = 1;
+         }
+         else
+         {
+            difference[i] = minuend[i] - min;
+            min = 0;
+         }
+      };
    }
-   for (int i = 0; i < 60; i++)
-   {
-     std::cout << difference[i];
-   }
-   std::cout << "  " << std::endl;
-   
-  
+   // for (int i = 0; i < 2; i++)
+   // {
+   //    std::cout << difference[i] << std::endl;
+   // }
 
-    int digits = 0;
+   int digits = 0;
    for (int i = (minuendSize + subtrahendSize - 1); i >= 0; i--)
    {
       if (difference[i] == 0)
@@ -409,18 +450,21 @@ int main()
    int hugeInt4[arraySize] = {0};
    int hugeInt4Size;
 
-   // int huge1[4] = {5, 3, 5, 1};
-   // int huge2[2] = {6, 3};
-   // int n = 4;
-   // int m = 2;
-   // int k = 4;
-   // subtraction(huge1, huge2, hugeInt4, n, m, k);
-   // printOperation(huge1, huge2, hugeInt4, '-', n, m, k);
+   int huge1[13] = {8,5,1,7,7,5,1,5,0,1,0,1,8};
+   int huge2[13] = {6,4,4,9,6,8,8,6,2,9,4,8,3};
+   int n = 13;
+   int m = 13;
+   int k = 13;
+   //8101051577158
+   //3849268869446
 
-   // // hugeInt4 = hugeInt3 - hugeInt1
+   subtraction(huge1, huge2, hugeInt4, n, m, k);
+   printOperation(huge1, huge2, hugeInt4, '-', n, m, k);
+
+   // hugeInt4 = hugeInt3 - hugeInt1
    subtraction(hugeInt3, hugeInt1, hugeInt4, hugeInt3Size, hugeInt1Size, hugeInt4Size);
 
-   // // cout << hugeInt3 << " - " << hugeInt2 << " == " << hugeInt4 << endl << endl;
+   // cout << hugeInt3 << " - " << hugeInt2 << " == " << hugeInt4 << endl << endl;
    printOperation(hugeInt3, hugeInt1, hugeInt4, '-', hugeInt3Size, hugeInt1Size, hugeInt4Size);
 
    // // if( hugeInt2 == hugeInt4 ) cout << hugeInt2 << " == " << hugeInt4 << endl << endl;
