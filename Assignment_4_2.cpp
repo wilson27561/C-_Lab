@@ -156,74 +156,33 @@ void addition(int addend[], int adder[], int sum[], int addendSize, int adderSiz
 void subtraction(int minuend[], int subtrahend[], int difference[],
                  int &minuendSize, int subtrahendSize, int &differenceSize)
 {
-   // differenceSize = minuendSize > subtrahendSize ? minuendSize : subtrahendSize;
-   // int min = 0;
-   // for (int i = 0; i < differenceSize; i++)
-   // {
-   //    if (i >= subtrahendSize)
-   //    {
-   //       if (minuend[i] - min < 0)
-   //       {
-   //          difference[i] = minuend[i] - min + 10;
-   //          min = 1;
-   //       }
-   //       else
-   //       {
-   //          difference[i] = minuend[i] - min;
-   //          min = 0;
-   //       }
-   //    }
-   //    else if (subtrahend[i] > (minuend[i] - min))
-   //    {
-   //       difference[i] = minuend[i] + 10 - subtrahend[i] - min;
-   //       min = 1;
-   //    }
-   //    else
-   //    {
-   //       difference[i] = minuend[i] - subtrahend[i] - min;
-   //       min = 0;
-   //    }
-   // }
-   // for (int i = 0; i < 60; i++)
-   // {
-   //    std::cout << difference[i];
-   // }
-   // std::cout << "  " << std::endl;
-   differenceSize = minuendSize > subtrahendSize ? minuendSize : subtrahendSize;
-   int min = 0;
-   for (int i = 0; i < differenceSize; i++)
+    for (int i = 0; i < minuendSize; i++)
    {
       if (i < subtrahendSize)
       {
-         if (subtrahend[i] > (minuend[i] - min))
+         if (subtrahend[i] > (minuend[i]+difference[i]))
          {
-            difference[i] = minuend[i] - min + 10 - subtrahend[i];
-            min = 1;
+            difference[i] = (minuend[i] + 10 ) - subtrahend[i] +difference[i];
+            difference[i+1] --;
          }
          else
          {
-            difference[i] = minuend[i] - min - subtrahend[i];
-            min = 0;
+            difference[i] = minuend[i] - subtrahend[i]+difference[i];
          }
       }
       else
       {
-         if (minuend[i] - min < 0)
+         if ( (minuend[i]+difference[i]) < 0)
          {
-            difference[i] = minuend[i] - min + 10;
-            min = 1;
+            difference[i] = minuend[i] + 10 + difference[i];
+            difference[i+1] --;
          }
          else
          {
-            difference[i] = minuend[i] - min;
-            min = 0;
+            difference[i] = minuend[i] + difference[i];
          }
-      };
+      }
    }
-   // for (int i = 0; i < 2; i++)
-   // {
-   //    std::cout << difference[i] << std::endl;
-   // }
 
    int digits = 0;
    for (int i = (minuendSize + subtrahendSize - 1); i >= 0; i--)
@@ -449,23 +408,39 @@ int main()
 
    int hugeInt4[arraySize] = {0};
    int hugeInt4Size;
+   
+   int hugeInt10[arraySize] = {0};
+   int hugeInt10Size;
 
-   int huge1[13] = {8,5,1,7,7,5,1,5,0,1,0,1,8};
-   int huge2[13] = {6,4,4,9,6,8,8,6,2,9,4,8,3};
-   int n = 13;
-   int m = 13;
-   int k = 13;
+   int huge1[3] = {0,0,1};
+   int huge2[2] = {0,2};
+  
+   int n = 3;
+   int m = 2;
+   int k = 2;
    //8101051577158
    //3849268869446
 
    subtraction(huge1, huge2, hugeInt4, n, m, k);
-   printOperation(huge1, huge2, hugeInt4, '-', n, m, k);
+    for (int i = 0; i < k; i++)
+    {
+     std::cout <<hugeInt4[i];
+    }
+    std::cout << "" << std::endl;
+    
+   subtraction(hugeInt4, huge2, hugeInt10, k, m, hugeInt10Size);
+    for (int i = 0; i < k; i++)
+    {
+     std::cout <<hugeInt4[i];
+    }
+    std::cout << "" << std::endl;
+   printOperation(huge1, huge2, hugeInt4, '-', k, m, k);
 
    // hugeInt4 = hugeInt3 - hugeInt1
-   subtraction(hugeInt3, hugeInt1, hugeInt4, hugeInt3Size, hugeInt1Size, hugeInt4Size);
+   // subtraction(hugeInt3, hugeInt1, hugeInt4, hugeInt3Size, hugeInt1Size, hugeInt4Size);
 
    // cout << hugeInt3 << " - " << hugeInt2 << " == " << hugeInt4 << endl << endl;
-   printOperation(hugeInt3, hugeInt1, hugeInt4, '-', hugeInt3Size, hugeInt1Size, hugeInt4Size);
+   // printOperation(hugeInt3, hugeInt1, hugeInt4, '-', hugeInt3Size, hugeInt1Size, hugeInt4Size);
 
    // // if( hugeInt2 == hugeInt4 ) cout << hugeInt2 << " == " << hugeInt4 << endl << endl;
    // if( equal( hugeInt2, hugeInt4, hugeInt2Size, hugeInt4Size ) )

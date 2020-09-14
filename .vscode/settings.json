@@ -42,7 +42,9 @@
         "typeinfo": "cpp",
         "list": "cpp",
         "ctime": "cpp",
-        "cstring": "cpp"
+        "cstring": "cpp",
+        "map": "cpp",
+        "queue": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled"
 }
