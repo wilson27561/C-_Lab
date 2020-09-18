@@ -27,26 +27,34 @@ bool equal(vector<int> hugeInt1, vector<int> hugeInt2)
    return 1;
 };
 // Returns true if and only if hugeInt2 > hugeInt1
-bool les (vector<int> hugeInt1, vector<int> hugeInt2){
-  if(hugeInt2.size() < hugeInt1.size()){
-     return 0;
-  } else if (hugeInt2.size() > hugeInt1.size()){
-     return 1;
-  }else
-  {
+bool les(vector<int> hugeInt1, vector<int> hugeInt2)
+{
+   if (hugeInt2.size() < hugeInt1.size())
+   {
+      return 0;
+   }
+   else if (hugeInt2.size() > hugeInt1.size())
+   {
+      return 1;
+   }
+   else
+   {
       for (int i = (hugeInt1.size() - 1); i >= 0; i++)
       {
-         if (hugeInt1[i] == hugeInt2[i]){
+         if (hugeInt1[i] == hugeInt2[i])
+         {
             continue;
          }
-         if(hugeInt1[i]>hugeInt2[i] ){
+         if (hugeInt1[i] > hugeInt2[i])
+         {
             return 0;
-         }else
+         }
+         else
          {
             return 1;
          }
       }
-  }
+   }
    return 1;
 }
 
@@ -63,14 +71,17 @@ bool greater(vector<int> hugeInt1, vector<int> hugeInt2)
    }
    else
    {
-     for (int i = (hugeInt1.size() - 1); i >= 0; i++)
+      for (int i = (hugeInt1.size() - 1); i >= 0; i++)
       {
-         if (hugeInt1[i] == hugeInt2[i]){
+         if (hugeInt1[i] == hugeInt2[i])
+         {
             continue;
          }
-         if(hugeInt2[i]>hugeInt1[i] ){
+         if (hugeInt2[i] > hugeInt1[i])
+         {
             return 0;
-         }else
+         }
+         else
          {
             return 1;
          }
@@ -78,6 +89,64 @@ bool greater(vector<int> hugeInt1, vector<int> hugeInt2)
    }
    return 1;
 };
+
+vector<int> divideBy10(vector<int> divisor)
+{
+   divisor.erase(divisor.begin());
+
+   return divisor;
+};
+
+vector<int> sub(vector<int> minuend, vector<int> subtrahend){
+   
+   vector<int> temp; 
+   
+   temp.assign(subtrahend.begin(),subtrahend.end()); 
+
+    std::cout << "minuend : " << std::endl;
+      for (int i = 0; i < minuend.size(); i++)
+      {
+         std::cout << minuend[i];
+      }
+      std::cout << "" << std::endl;
+
+      std::cout << "subtrahend : " << std::endl;
+      for (int i = 0; i < subtrahend.size(); i++)
+      {
+         std::cout << subtrahend[i];
+      }
+      std::cout << "" << std::endl;
+
+
+   int size;
+   if(minuend.size() >= temp.size()){
+      size = minuend.size();
+   }
+   if(temp.size() > minuend.size()){
+      size = subtrahend.size();
+   }
+
+
+   for (int i = 0; i < minuend.size(); i++)
+   {
+      if(minuend[i] >= temp[i]){
+
+      }else
+      {
+        
+      }
+      
+
+
+
+   }
+   
+
+
+   
+
+    return minuend;
+}
 
 // Returns the sum of addend and adder, i.e., addend + adder
 vector<int> addition(vector<int> addend, vector<int> adder);
@@ -91,11 +160,67 @@ vector<int> multiplication(vector<int> multiplicand, vector<int> multiplier);
 // Returns the quotient of dividend divided by divisor, i.e., dividend / divisor
 vector<int> compQuotient(vector<int> dividend, vector<int> divisor)
 {
-   vector<int> divid;
-  
-   
+   vector<int> number1 = {0, 2, 1};
+   vector<int> number2 = {0, 2};
 
-   return divid;
+   //除數
+   vector<int> buffer;
+   
+   vector<int> number3 = sub(number1,number2);
+      std::cout << "sub : " << std::endl;
+      for (int i = 0; i < number3.size(); i++)
+      {
+         std::cout << number3[i];
+      }
+      std::cout << "" << std::endl;
+
+
+   //    //被除數
+   //    vector<int> remainder;
+   //    //商數
+   //    vector<int> quotient;
+   //    if (les(dividend, divisor))
+   //    {
+   //       std::cout << "error" << std::endl;
+   //    }
+
+   //    std::cout << "dividend : " << std::endl;
+   //    for (int i = 0; i < dividend.size(); i++)
+   //    {
+   //       std::cout << dividend[i];
+   //    }
+   //    std::cout << "" << std::endl;
+
+   //    // buffer 除數 補0到跟被除數一樣位數
+   //    int bufferSize = dividend.size() - divisor.size();
+   //    buffer.assign(divisor.begin(), divisor.end());
+
+   //    for (int i = 0; i < bufferSize; i++)
+   //    {
+   //      buffer.insert(buffer.begin(), 0);
+   //    }
+
+   //    //除數補0到跟被除數一樣位數，如果被除數小於除數商數直接+1，反之則除於10去做除法運算
+   //   if(les(dividend,buffer)){
+   //       buffer = divideBy10(buffer);
+   //   }else
+   //   {
+   //      quotient.push_back(1);
+   //   };
+
+   //   //將被除數複製給餘數
+   //   remainder.assign(dividend.begin(), dividend.end());
+
+   //   //除法相減
+
+   //  std::cout << "buffer : " << std::endl;
+   // for (int i = 0; i < buffer.size(); i++)
+   // {
+   //    std::cout << buffer[i];
+   // }
+   // std::cout << "" << std::endl;
+
+   return buffer;
 }
 
 // Returns the remainder of dividend divided by divisor, i.e., dividend % divisor
@@ -156,7 +281,7 @@ int main()
    // // if( hugeInt7 == hugeInt5 ) cout << hugeInt7 << " == " << hugeInt5 << endl << endl;
    // print( hugeInt7, hugeInt5 );
 
-   system("pause");
+   // system("pause");
 }
 
 void random(vector<int> &hugeInt)

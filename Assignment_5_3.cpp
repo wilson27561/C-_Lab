@@ -237,6 +237,8 @@ void sub(int minuend[], int subtrahend[], int &minuendSize, int subtrahendSize)
       }
    }
 }
+
+
 bool les(int hugeInt1[], int hugeInt2[], int hugeInt1Size, int hugeInt2Size)
 {
    //	cout <<"A"<<endl;
